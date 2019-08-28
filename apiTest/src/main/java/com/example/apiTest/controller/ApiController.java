@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class ApiController {
 
-	@RequestMapping("/")
+	private final String apiUrl="http://www.kma.go.kr/weather/forecast/mid-term-rss3.jsp";
+	
+	@RequestMapping("/apiCall")
 	public String apiCall() {
 	
 		return "/apiCall.html";
@@ -32,7 +34,14 @@ public class ApiController {
 		List<Map<String,Object>> apiList = new ArrayList<Map<String,Object>>();
 		
 		try {
-			Document doc = Jsoup.connect("http://en.wikipedia.org/").get();
+			Document doc = Jsoup
+					//커넥션 주소,data는 보낼 값 ,get방식인지 post방식인지 
+					.connect(apiUrl)
+					.data("stnId", stnId)
+					.get();
+			
+			System.out.println(doc.html());
+			
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
