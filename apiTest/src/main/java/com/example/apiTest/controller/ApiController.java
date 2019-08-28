@@ -1,13 +1,19 @@
 package com.example.apiTest.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 
 @Controller
 public class ApiController {
@@ -24,6 +30,12 @@ public class ApiController {
 		System.out.println(stnId +"<< stnId");
 		
 		List<Map<String,Object>> apiList = new ArrayList<Map<String,Object>>();
+		
+		try {
+			Document doc = Jsoup.connect("http://en.wikipedia.org/").get();
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
 		
 		return apiList;
 	}
