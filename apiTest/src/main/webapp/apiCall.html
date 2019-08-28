@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>weather api</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('#apiCall').change(function(){
+				var stnId = $(this).val();
+				
+				var request = $.ajax({
+					  url: "/apiCallprocess",
+					  method: "POST",
+					  data: { stnId : stnId },
+					  dataType: "json"
+					});
+					 
+				request.done(function( data ) {
+				  	console.log(data);
+				});
+				 
+				request.fail(function( jqXHR, textStatus ) {
+				  	alert( "Request failed: " + textStatus );
+				});
+			});
+		});
+	
+	</script>
+</head>
+<body>
+	<select id = "apiCall">
+		<option value="108">:: 전국 ::</option>
+		<option value="146">:: 전라북도 ::</option>
+		<option value="109">:: 서울/경기 ::</option>
+		<option value="184">:: 제주도 ::</option>
+	</select>
+
+</body>
+</html>
